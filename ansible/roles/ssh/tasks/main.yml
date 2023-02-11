@@ -1,0 +1,20 @@
+---
+- name: "Create sshers group"
+  group:
+    name: sshers
+
+- name: "Add user {{ user_name }} to sshers group"
+  user:
+    name: "{{ user_name }}"
+    groups: sshers
+    append: true
+
+- name: Configure SSH server
+  template:
+    src: ssh_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - Restart SSH service

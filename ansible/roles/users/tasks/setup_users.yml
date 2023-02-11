@@ -1,0 +1,22 @@
+---
+- name: "Create {{ user_name }} user"
+  user:
+    name: "{{ user_name }}"
+    shell: /bin/bash
+    uid: 1000
+    group: users
+    groups: sudo
+    append: true
+    password: "{{ user_password }}"
+
+- name: "Add user {{ user_name }} to sudo-nopasswd group"
+  user:
+    name: "{{ user_name }}"
+    groups: sudo-nopasswd
+    append: true
+  when: passwordless_sudo is defined and passwordless_sudo == true
+
+- name: "Remove user {{ user_name }} from sudo-nopasswd group"
+  shell: /usr/sbin/delgroup {{ user_name }} sudo-nopasswd
+  when: not (passwordless_sudo is defined and passwordless_sudo == true)
+  ignore_errors: yes

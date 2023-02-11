@@ -1,0 +1,40 @@
+AcceptEnv LANG LC_*
+AllowAgentForwarding no
+{# using a boolean here and not a string, as a string might end up as 'True' if you set the variable to yes (without quote marks) #}
+AllowTcpForwarding {{ 'yes' if allow_tcp_forwarding is defined and allow_tcp_forwarding == true else 'no' }}
+AllowGroups sshers
+
+ChallengeResponseAuthentication no
+Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes256-ctr
+ClientAliveCountMax 3
+ClientAliveInterval 15
+Compression delayed
+
+GatewayPorts no
+
+HostbasedAuthentication no
+
+IgnoreRhosts yes
+
+KexAlgorithms curve25519-sha256@libssh.org
+
+ListenAddress {{ ansible_default_ipv4.address }}:{{ ssh_port | default('22') }}
+LoginGraceTime 10
+LogLevel INFO
+
+MaxAuthTries 3
+
+PasswordAuthentication no
+PermitEmptyPasswords no
+PermitRootLogin no
+Protocol 2
+PubkeyAuthentication yes
+
+StrictModes yes
+Subsystem sftp /usr/lib/openssh/sftp-server
+SyslogFacility AUTH
+
+UsePAM yes
+UsePrivilegeSeparation yes
+
+X11Forwarding no

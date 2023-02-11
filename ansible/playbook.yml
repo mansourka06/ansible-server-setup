@@ -1,0 +1,14 @@
+---
+- hosts: "{{ target_host }}"
+  become: yes
+  vars:
+    ansible_port: "{{ ssh_port | default('22') }}"
+  roles:
+    - apt_upgrade
+    - hostnames
+    - users
+    - ssh
+    - tools
+    - my_haproxy
+    - geerlingguy.firewall
+    - geerlingguy.docker

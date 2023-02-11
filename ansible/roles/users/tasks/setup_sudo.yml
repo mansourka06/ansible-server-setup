@@ -1,0 +1,14 @@
+---
+- name: Install sudo
+  apt:
+    name: sudo
+
+- name: Create "sudo-nopasswd" group
+  group:
+    name: sudo-nopasswd
+
+- name: Add "sudo-nopasswd" group to "sudoers" file
+  lineinfile:
+    dest: /etc/sudoers
+    line: "%sudo-nopasswd ALL=(ALL:ALL) NOPASSWD:ALL"
+    regexp: "^%sudo-nopasswd"

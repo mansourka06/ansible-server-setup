@@ -1,0 +1,28 @@
+---
+- name: Add "stretch-backports" to sources (required for HAProxy 1.8)
+  apt_repository:
+    repo: deb http://httpredir.debian.org/debian stretch-backports main
+    state: present
+    update_cache: yes
+
+- name: Install HAProxy
+  apt:
+    name: haproxy
+    state: present
+    default_release: stretch-backports
+    cache_valid_time: 3600
+
+- name: Check if the Certbot certificates exist
+  stat:
+    path: /opt/certbot/haproxy_fullchains/__fallback.pem
+  register: certbot_cert_check_result
+
+- name: Copy haproxy.cfg
+  template:
+    src: haproxy.cfg.j2
+    dest: /etc/haproxy/haproxy.cfg
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+  - Restart HAProxy

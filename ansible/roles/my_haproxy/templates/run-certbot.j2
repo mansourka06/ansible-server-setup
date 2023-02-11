@@ -1,0 +1,8 @@
+runuser -l certbot -c 'certbot run \
+    --authenticator certbot-haproxy:haproxy-authenticator \
+    --installer certbot-haproxy:haproxy-installer \
+    --non-interactive \
+    --domains {% for domain in happycoders_domains %}{% if loop.index > 1 %},{%  endif %}www.{{ domain }},{{ domain }}{%  endfor %} \
+    --expand \
+    --agree-tos \
+    --email sven@happycoders.eu'

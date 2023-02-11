@@ -1,0 +1,9 @@
+---
+- name: Copy Users's .bash_aliases
+  copy:
+    src: .bash_aliases
+    dest: /home/{{ item }}/
+    owner: "{{ item }}"
+    group: users
+    mode: 0644
+  loop: "{{ user_name }}"

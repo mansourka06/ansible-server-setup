@@ -1,0 +1,89 @@
+---
+- name: Add "stretch-backports" to sources (required for HAProxy 1.8)
+  apt_repository:
+    repo: deb http://httpredir.debian.org/debian stretch-backports main
+    state: present
+    update_cache: yes
+
+- name: Install Certbot
+  apt:
+    name: python-certbot
+    state: present
+    default_release: stretch-backports
+    cache_valid_time: 3600
+
+- name: Create "certbot" group
+  group:
+    name: certbot
+
+- name: Create "certbot" user
+  user:
+    name: certbot
+    group: certbot
+    groups: haproxy
+    shell: /bin/bash
+    home: /opt/certbot
+
+- name: Generate 2048-bit dhparams.pem file
+  openssl_dhparam:
+    owner: root
+    group: root
+    mode: 0644
+    path: /opt/certbot/dhparams.pem
+    size: 2048
+
+- name: Create Certbot logs directory
+  file:
+    path: /opt/certbot/logs
+    state: directory
+    owner: certbot
+    group: certbot
+    mode: 0755
+
+- name: Create Certbot config directory
+  file:
+    path: /opt/certbot/config
+    state: directory
+    owner: certbot
+    group: certbot
+    mode: 0755
+
+- name: Create Certbot .config/letsencrypt directory
+  file:
+    path: /opt/certbot/.config/letsencrypt
+    state: directory
+    owner: certbot
+    group: certbot
+    mode: 0755
+
+- name: Copy Certbot configuration
+  copy:
+    src: cli.ini
+    dest: /opt/certbot/.config/letsencrypt/
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Allow the certbot user to restart HAProxy
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    line: '%certbot ALL=NOPASSWD: /bin/systemctl restart haproxy'
+    regexp: '^%certbot'
+
+- name: Clone certbot-haproxy repository
+  git:
+    repo: https://code.greenhost.net/open/certbot-haproxy.git
+    dest: /opt/certbot/certbot-haproxy
+
+- name: Install python-setuptools
+  apt:
+    name: python-setuptools
+
+- name: Install pip
+  easy_install:
+    name: pip
+
+- name: Install certbot-haproxy
+  pip:
+    name: /opt/certbot/certbot-haproxy/

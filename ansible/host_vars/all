@@ -1,0 +1,69 @@
+---
+# playbook vars
+target_host: localhost
+
+
+# vars for user and aliases role
+user_name: ansible
+user_password: $6$6R2TYMC2IXne$PmhaM/x9ENH1HMNtI7BoQPmoVdqbBDN8D1gDh0rpRAmi/vvFn9lcmDq7LDVa4g4kZz84C1yl252x24VQSr4ob1
+
+# vars for tools role
+list_packages:
+  - mc
+  - ntp
+  - curl
+  - vim
+  - wget
+
+###################
+install_image:
+  path: /root/.oldroot/nfs/install/installimage
+  raid: yes -l 1
+  image: /root/.oldroot/nfs/images/Debian-95-stretch-64-minimal.tar.gz
+  drives: sda,sdb
+
+passwordless_sudo: true
+
+ssh_port: 5930
+
+firewall_allowed_tcp_ports:
+  - 80
+  - 443
+  - 5930
+
+docker_package: docker-ce=18.06.1~ce~3-0~debian
+docker_compose_version: 1.23.1
+docker_users:
+  - sven
+
+wordpress_docker:
+  mysql_version: 5.7
+  mysql_root_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          31343238663339383963306265383162313163316235343231306632636535663262356365623262
+          3063333565633661633537346634666165353234633566300a313466303964353166646664663561
+          35346565633663613662316636613533616331316136646434356163396136323233626365306531
+          6134393036666133380a313464623266393936613466383732363330313262303663393364616364
+          3539
+  mysql_wordpress_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          32393634306361376462396265346531386561633539303739663563383065643830363030663934
+          3934613635386132396135363865616361303065353638360a313061303730306366306637643335
+          38363136643165623032636263366335613034633332396466303864343163386539663162613764
+          6337353765666133630a363030313437646531636339626634363638633830633464373366616634
+          3931
+
+happycoders_testing: true
+
+happycoders_domains:
+  - happycoders.eu
+  - happycoders.at
+  - happycoders.biz
+  - happycoders.ch
+  - happycoders.club
+  - happycoders.de
+  - happycoders.info
+  - happycoders.it
+  - happycoders.me
+  - happycoders.net
+  - happycoders.uk

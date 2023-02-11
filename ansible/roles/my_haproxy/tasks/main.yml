@@ -1,0 +1,4 @@
+---
+- import_tasks: install_haproxy.yml
+- import_tasks: install_certbot.yml
+- import_tasks: setup_certbot_script.yml

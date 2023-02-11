@@ -1,0 +1,21 @@
+---
+- name: Create docker/wordpress directory
+  file:
+    path: /opt/docker/wordpress
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Copy docker-compose file
+  template:
+    src: docker-compose.yml
+    dest: /opt/docker/wordpress/
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Run docker-compose up
+  shell: docker-compose up -d
+  args:
+    chdir: /opt/docker/wordpress/

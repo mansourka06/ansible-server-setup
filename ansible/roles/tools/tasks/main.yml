@@ -1,0 +1,6 @@
+---
+- name: "Install Midnight Commander, NTP, and other packages"
+  apt:
+    name: "{{ list_packages }}"
+    cache_valid_time: 3600
+  when: ansible_os_family is regex(Debian|Ubunut)

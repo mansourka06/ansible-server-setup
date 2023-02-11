@@ -1,0 +1,3 @@
+---
+- name: Install Python on the rescue system
+  raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
