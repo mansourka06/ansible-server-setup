@@ -5,19 +5,18 @@ Setup a server configuration of User Accounts, SSH, and Firewall, and installtin
 ### Prerequisites
 - Linux basic knowlege
 
-### Installing
-Here is same step for using this project.
-
-- clone the repository: git clone https://github.com/mansourka06/ansible-server-setup.git
-
-
 ### Usage
 :information_souce: **Informations**
-- specialise your install by setting your in varibales in the [host_vars file](./host_vars)
 
-- Choose the roles your want to install form the [playbook](./playbook.yml)
+Here is same step for using this project.
 
-- run the playbook: **ansinble-playbook playbook.yml**
+* 1- clone the repository: git clone https://github.com/mansourka06/ansible-server-setup.git
+
+* 2- specialise your install by setting your in varibales in the [host_vars file](./host_vars)
+
+* 3- Choose the roles your want to install form the [playbook](./playbook.yml)
+
+* 4- run the playbook: **ansinble-playbook playbook.yml**
 
 
 ### Auhtor
