@@ -12,7 +12,7 @@ Here is same step for using this project.
 
 
 ### Usage
-:information_souce: **Informations**
+:information_source: **Informations**
 - specialise your install by setting your in varibales in the [host_vars file](./host_vars)
 
 - Choose the roles your want to install form the [playbook](./playbook.yml)
