@@ -16,7 +16,9 @@ Here is same step for using this project.
 
 * 3- Choose the role your want to install form the [playbook](./ansible/playbook.yml)
 
-* 4- run the playbook: **ansinble-playbook playbook.yml**
+* 4- Configure your target host in [inventory file](./ansible/hosts.ini)
+
+* 5- run the playbook: **ansinble-playbook playbook.yml**
 
 
 ### Auhtor
