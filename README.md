@@ -14,9 +14,11 @@ Here is same step for using this project.
 
 * 2- specialise your install by setting your in varibales in the [host_vars file](./host_vars)
 
-* 3- Choose the roles your want to install form the [playbook](./playbook.yml)
+* 3- specialise your install by setting your in varibales in the [host_vars file](./host_vars)
 
-* 4- run the playbook: **ansinble-playbook playbook.yml**
+* 4- Choose the roles your want to install form the [playbook](./playbook.yml)
+
+* 5- run the playbook: **ansinble-playbook playbook.yml**
 
 
 ### Auhtor
