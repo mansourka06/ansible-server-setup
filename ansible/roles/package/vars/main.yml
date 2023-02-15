@@ -1,0 +1,15 @@
+###
+# list packages to install
+package_install:
+  - mc
+  - ntp
+  - curl
+  - vim
+  - wget
+
+
+
+# list packages to uninstall
+package_uninstall:
+  - vim
+  - curl

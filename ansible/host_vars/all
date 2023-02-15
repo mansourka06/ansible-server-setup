@@ -8,7 +8,7 @@ user_name: ansible
 user_password: $6$6R2TYMC2IXne$PmhaM/x9ENH1HMNtI7BoQPmoVdqbBDN8D1gDh0rpRAmi/vvFn9lcmDq7LDVa4g4kZz84C1yl252x24VQSr4ob1
 
 # vars for tools role
-list_packages:
+package_install:
   - mc
   - ntp
   - curl
